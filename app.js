@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import cors from "cors";
+import userRouter from "./routes/user.js";
 //* Port for the server
 const PORT = process.env.PORT || 4000;
 
@@ -32,6 +33,7 @@ app.use(
 ); //cors
 
 //* Routes
+app.use("/user", userRouter);
 
 //* Start the server
 app.listen(PORT, () => {

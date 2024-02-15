@@ -15,11 +15,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  role: {
+  /*   role: {
     type: Schema.Types.ObjectId,
     ref: "Role",
-    required: true,
-  },
+  }, */
 });
 // the userId is automatically genereated for each user.
 const User = model("User", userSchema);
