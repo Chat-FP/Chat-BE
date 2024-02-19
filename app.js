@@ -5,6 +5,7 @@ import morgan from "morgan";
 import cors from "cors";
 import userRouter from "./routes/user.js";
 import roleRouter from "./routes/role.js";
+/* import { seedRoles } from "./services/seed.services.js"; */
 //* Port for the server
 const PORT = process.env.PORT || 4000;
 
@@ -36,6 +37,8 @@ app.use(
 //* Routes
 app.use("/user", userRouter);
 app.use("/role", roleRouter);
+//* seed the database
+/* const roles = await seedRoles(); */
 
 //* Start the server
 app.listen(PORT, () => {
