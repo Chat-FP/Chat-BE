@@ -19,6 +19,12 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Role",
   },
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 // the userId is automatically genereated for each user.
 const User = model("User", userSchema);
