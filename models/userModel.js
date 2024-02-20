@@ -18,7 +18,6 @@ const userSchema = new Schema({
   role: {
     type: Schema.Types.ObjectId,
     ref: "Role",
-    required: true,
   },
 });
 // the userId is automatically genereated for each user.

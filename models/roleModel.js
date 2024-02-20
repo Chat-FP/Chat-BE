@@ -1,13 +1,13 @@
 import { Schema, model } from "mongoose";
 const roleSchema = new Schema({
-  Label: {
+  label: {
     type: String,
-    required: true,
+    /*    required: true, */
     unique: true,
   },
   previlegeLevel: {
     type: Number,
-    required: true,
+    /* required: true, */
     unique: true,
   },
   canWriteSelf: {
