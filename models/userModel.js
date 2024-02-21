@@ -25,6 +25,12 @@ const userSchema = new Schema({
       ref: "User",
     },
   ],
+  blockedUsers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 // the userId is automatically genereated for each user.
 const User = model("User", userSchema);
