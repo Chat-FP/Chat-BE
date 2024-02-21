@@ -6,6 +6,8 @@ import cors from "cors";
 import userRouter from "./routes/user.js";
 import roleRouter from "./routes/role.js";
 import friendRouter from "./routes/friend.js";
+//import serverRouter from "./routes/server.js";
+import blockedUserRouter from "./routes/blockedUser.js";
 /* import { seedRoles } from "./services/seed.services.js"; */
 //* Port for the server
 const PORT = process.env.PORT || 4000;
@@ -39,6 +41,8 @@ app.use(
 app.use("/user", userRouter);
 app.use("/role", roleRouter);
 app.use("/friend", friendRouter);
+app.use("/blockedUser", blockedUserRouter);
+/* app.use("/server", serverRouter); */
 //* seed the database
 /* const roles = await seedRoles(); */
 
