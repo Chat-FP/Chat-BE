@@ -34,9 +34,10 @@ app.use(express.json()); //body parser
 app.use(
   cors({
     origin: process.env.CLIENT || "http://localhost:5173",
+    allowedHeaders: 'Content-Type',
+    credentials: true,
   })
-); //cors
-
+);
 //* Routes
 app.use("/user", userRouter);
 app.use("/role", roleRouter);
