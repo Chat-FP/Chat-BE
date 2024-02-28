@@ -1,3 +1,4 @@
+// OLD CODE FOR EXTERNAL SOCKET IO SERVER WHICH IS INCLUDED IN APP.JS NOW
 import express from "express";
 //* import of socket.io
 import http from "http";
