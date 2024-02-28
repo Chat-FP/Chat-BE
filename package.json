@@ -25,6 +25,7 @@
   "contributors": [],
   "scripts": {
     "dev": "nodemon --env-file=.env app.js",
+    "start": "node --env-file=.env app.js",
     "test": ""
   },
   "dependencies": {
