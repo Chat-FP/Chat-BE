@@ -20,7 +20,6 @@ const PORT = process.env.PORT || 4000;
 
 //* URI for the database
 const URI = process.env.DB_URI;
-console.log(URI);
 
 const app = express();
 
@@ -46,13 +45,15 @@ io.on("connection", (socket) => {
 
 //* mongoose connection to the database
 mongoose
-  .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PW}@cluster0.79l9asu.mongodb.net/chat_app?retryWrites=true&w=majority` //`mongodb://localhost:27017/chat_app`, //URI
-  )
-  .then(() => console.log("MongoDB connected successfully"))
-  .catch((err) => console.log(err));
+  .connect(process.env.DB_URI)
+  .then(() => {
+    console.log("Connected to the database");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 mongoose.connection.on("error", (err) => {
-  console.log("err", err);
+  console.log("an error:", err);
 });
 
 //* Middlewares for the server
