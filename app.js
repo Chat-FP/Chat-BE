@@ -9,6 +9,7 @@ import friendRouter from "./routes/friend.js";
 //import serverRouter from "./routes/server.js";
 import blockedUserRouter from "./routes/blockedUser.js";
 /* import { seedRoles } from "./services/seed.services.js"; */
+
 //* Port for the server
 const PORT = process.env.PORT || 4000;
 
@@ -33,8 +34,8 @@ app.use(morgan("dev")); //logger
 app.use(express.json()); //body parser
 app.use(
   cors({
-    origin: process.env.CLIENT || "http://localhost:5173",
-    allowedHeaders: 'Content-Type',
+    origin: process.env.CLIENT || "http://localhost:5174",
+    allowedHeaders: "Content-Type",
     credentials: true,
   })
 );
