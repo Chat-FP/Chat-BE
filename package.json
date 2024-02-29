@@ -44,9 +44,14 @@
     "mongoose": "^8.1.2",
 <<<<<<< HEAD
     "morgan": "^1.10.0",
+    "nodemon": "^3.1.0"
+=======
+<<<<<<< HEAD
+    "morgan": "^1.10.0",
     "socket.io": "^4.7.4"
 =======
     "morgan": "^1.10.0"
 >>>>>>> main
+>>>>>>> 0cb2d69dee22cbb0b90db439c02b5dff74f490e4
   }
 }
