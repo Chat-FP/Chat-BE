@@ -25,17 +25,28 @@
   "contributors": [],
   "scripts": {
     "dev": "nodemon --env-file=.env app.js",
+<<<<<<< HEAD
     "render": "node app.js"
+=======
+    "test": ""
+>>>>>>> main
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
+<<<<<<< HEAD
     "dotenv": "^16.4.5",
+=======
+>>>>>>> main
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.2",
+<<<<<<< HEAD
     "morgan": "^1.10.0",
     "socket.io": "^4.7.4"
+=======
+    "morgan": "^1.10.0"
+>>>>>>> main
   }
 }
