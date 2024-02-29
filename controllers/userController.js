@@ -62,7 +62,6 @@ export const login = async (req, res) => {
   }
 };
 //* CRUD operations for the user controller
-<<<<<<< HEAD
 //* 1. READ
 export const getUsers = async (req, res) => {
   try {
@@ -73,13 +72,6 @@ export const getUsers = async (req, res) => {
     } else {
       res.status(501).send("No User found");
     }
-=======
-//* 1. Create
-export const getUsers = async (req, res) => {
-  try {
-    const users = await User.find();
-    res.status(200).send(users);
->>>>>>> main
   } catch (error) {
     res.status(500).send({ message: "Something went wrong" });
   }
