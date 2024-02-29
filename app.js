@@ -19,7 +19,7 @@ dotenv.config();
 const PORT = process.env.PORT || 4000;
 
 //* URI for the database
-const URI = process.env.DB_URI;
+const dbURI = process.env.DB_URI;
 
 const app = express();
 
@@ -38,14 +38,13 @@ io.on("connection", (socket) => {
     console.log("user disconnected");
   });
   socket.on("chat message", (msg) => {
-    //console.log("message: " + msg);
     io.emit("chat message", msg);
   });
 });
 
 //* mongoose connection to the database
 mongoose
-  .connect(process.env.DB_URI)
+  .connect(dbURI)
   .then(() => {
     console.log("Connected to the database");
   })
@@ -80,7 +79,7 @@ app.listen(PORT, (err) => {
   if (err) {
     console.log(err);
   } else {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`HTTP Server is running on port ${PORT}`);
   }
 });
 

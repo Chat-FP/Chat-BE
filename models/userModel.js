@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 //* Create a schema for the user
-const userSchema = new Schema({
+const usersSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -33,5 +33,5 @@ const userSchema = new Schema({
   ],
 });
 // the userId is automatically genereated for each user.
-const User = model("User", userSchema);
-export default User;
+const Users = model("users", usersSchema, "users");
+export default Users;
