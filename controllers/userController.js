@@ -27,6 +27,7 @@ export const register = async (req, res) => {
     res.status(201).send({ user });
   } catch (error) {
     console.log(error);
+    res.status(500).send({ message: error.message });
   }
 };
 //* Login function for the user controller
