@@ -60,9 +60,12 @@ app.use(morgan("dev")); //logger
 app.use(express.json()); //body parser
 app.use(
   cors({
-    origin: process.env.CLIENT || "http://localhost:5173",
+    /*  origin: process.env.CLIENT || "http://localhost:5173",
     allowedHeaders: "Content-Type",
-    credentials: true,
+    credentials: true, */
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Access-Control-Allow-Headers"],
   })
 );
 //* Routes
