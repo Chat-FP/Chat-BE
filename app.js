@@ -60,12 +60,10 @@ app.use(morgan("dev")); //logger
 app.use(express.json()); //body parser
 app.use(
   cors({
-    /*  origin: process.env.CLIENT || "http://localhost:5173",
-    allowedHeaders: "Content-Type",
-    credentials: true, */
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Access-Control-Allow-Headers"],
+    origin: process.env.CLIENT || "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Access-Control-Allow-Origin"],
+    credentials: true,
   })
 );
 //* Routes
@@ -73,9 +71,6 @@ app.use("/user", userRouter);
 app.use("/role", roleRouter);
 app.use("/friend", friendRouter);
 app.use("/blockedUser", blockedUserRouter);
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
 /* app.use("/server", serverRouter); */
 //* seed the database
 /* const roles = await seedRoles(); */
