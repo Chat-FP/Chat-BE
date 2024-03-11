@@ -11,6 +11,10 @@ import { Server } from "socket.io";
 import http from "http";
 import dotenv from "dotenv";
 dotenv.config();
+import messageRouter from "./routes/message.js";
+import chatRouter from "./routes/chat.js";
+import { getChatHistory } from "./controllers/chatController.js";
+import { saveMessage } from "./controllers/messageController.js";
 
 //import serverRouter from "./routes/server.js";
 /* import { seedRoles } from "./services/seed.services.js"; */
@@ -31,9 +35,54 @@ const io = new Server(socketServer, {
     methods: ["GET", "POST"],
   },
 });
-//* create the socket connection
+const newMessages = [];
+
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  console.log("a user connected with his userSocketId: ", socket.id);
+  //@TODO woher wissen aus aus socket den raum? socket.rooms.map ???
+  socket.on("chat message", (msg, to) => {
+    //console.log("msg", msg);
+    //console.log("to", to);
+    io.to(to).emit("chat message", msg);
+    newMessages.push({ sender: socket.id.toString(), message: msg.toString() });
+    //console.log(newMessages);
+    if (newMessages.length >= 1) {
+      const savedMessages = saveMessage(newMessages);
+      //console.log(savedMessages);
+      newMessages.length = 0;
+    }
+  });
+});
+
+/* //* create the socket connection:
+// one to one chat
+io.on("connection", (socket) => {
+  console.log("a user connected:" + socket.id);
+
+  socket.on("chat message", (msg, to) => {
+    io.to(to).emit("chat message", msg);
+  });
+  const chatHistory = getChatHistory();
+  console.log("ChatHistory", chatHistory);
+
+  socket.emit("chat history", chatHistory);
+  socket.on("chat message", (msg) => {
+    io.emit("chat message", msg);
+  });
+
+  //one to one chat history
+  socket.on("chat history", (data) => {
+    const { sender, receiver } = data;
+    const chatHistory = getChatHistory(sender, receiver);
+    socket.emit("chat history", chatHistory);
+  });
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
+});
+// one to many chat
+io.on("connection", (socket) => {
+  console.log("a user connected:" + socket.id);
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
@@ -41,7 +90,7 @@ io.on("connection", (socket) => {
     io.emit("chat message", msg);
   });
 });
-
+ */
 //* mongoose connection to the database
 mongoose
   .connect(dbURI)
@@ -71,9 +120,12 @@ app.use("/user", userRouter);
 app.use("/role", roleRouter);
 app.use("/friend", friendRouter);
 app.use("/blockedUser", blockedUserRouter);
+app.use("/message", messageRouter);
+app.use("/chatHistory", chatRouter);
 /* app.use("/server", serverRouter); */
 //* seed the database
 /* const roles = await seedRoles(); */
+// chatHistory
 
 //* Start the server
 app.listen(PORT, (err) => {
