@@ -42,7 +42,7 @@ export const login = async (req, res) => {
     const user = await User.findOne({ username: username });
     console.log("user aus DB", user);
     if (!user) {
-      return res.stattus(400).send("invalid credentials");
+      return res.status(400).send("invalid credentials");
     }
     const isMatch = await bcrypt.compare(password, user.password);
     console.log("isMatch", isMatch);
