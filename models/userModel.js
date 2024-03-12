@@ -31,7 +31,13 @@ const usersSchema = new Schema({
       ref: "User",
     },
   ],
+  session_id: [
+    {
+      type: [String], // wo die session id gespeichert wird
+    },
+  ],
 });
+
 // the userId is automatically genereated for each user.
 const Users = model("users", usersSchema, "users");
 export default Users;
