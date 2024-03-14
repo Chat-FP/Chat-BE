@@ -4,12 +4,14 @@ import Message from "../models/messageModel.js";
 
 export const sendMessage = async (req, res) => {
   try {
-    const { sender, receiver, message } = req.body;
+    const { msgObj, receiver } = req.body;
+
+    console.log(msgObj);
 
     const newMessage = new Chat({
-      sender,
-      receiver,
-      message,
+      senderUser: msgObj.senderUser,
+      sender: msgObj.sender,
+      message: msgObj.message,
     });
 
     const savedMessage = await newMessage.save();
@@ -45,9 +47,19 @@ export const updateMessage = async (req, res) => {
 export const saveMessage = async (newMessages) => {
   try {
     const jsonNewMessages = JSON.stringify(newMessages);
-    console.log(jsonNewMessages);
+    console.log("newMsgs", newMessages[0].message);
+    console.log("jsonMsg", jsonNewMessages);
+    const mappedMassages = newMessages.map((msgObj) => {
+      return {
+        sender: msgObj.message.sender,
+        message: msgObj.message.message,
+        senderUser: msgObj.message.senderUser,
+      };
+    });
+    console.log(mappedMassages);
     if (jsonNewMessages) {
-      const savedMessage = await Message.insertMany(jsonNewMessages);
+      const savedMessage = await Message.insertMany(mappedMassages);
+      console.log("savedMessages", savedMessage);
       if (savedMessage) {
         await console.log("savedMessages", savedMessage);
         return savedMessage;

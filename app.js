@@ -40,13 +40,15 @@ const newMessages = [];
 io.on("connection", (socket) => {
   console.log("a user connected with his userSocketId: ", socket.id);
   //@TODO woher wissen aus aus socket den raum? socket.rooms.map ???
+  /*   const rooms = Object.keys(socket.rooms).filter((room) => room !== socket.id);
+  console.log("rooms", rooms); */
   socket.on("chat message", (msg, to) => {
     //console.log("msg", msg);
     //console.log("to", to);
     io.to(to).emit("chat message", msg);
-    newMessages.push({ sender: socket.id.toString(), message: msg.toString() });
+    newMessages.push({ sender: socket.id.toString(), message: msg });
     //console.log(newMessages);
-    if (newMessages.length >= 1) {
+    if (newMessages.length >= 3) {
       const savedMessages = saveMessage(newMessages);
       //console.log(savedMessages);
       newMessages.length = 0;

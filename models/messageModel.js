@@ -8,6 +8,10 @@ export const messageSchema = new Schema(
       type: String,
       required: true,
     },
+    senderUser: {
+      type: String,
+      required: true,
+    },
 
     message: {
       type: String,
