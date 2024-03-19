@@ -6,9 +6,10 @@ export const sendMessage = async (req, res) => {
   try {
     const { msgObj, receiver } = req.body;
 
-    console.log(msgObj);
+    console.log("cookie", req.cookies);
 
     const newMessage = new Chat({
+      //session_id: `${req.user_id}_${chatNumber}`,
       senderUser: msgObj.senderUser,
       sender: msgObj.sender,
       message: msgObj.message,
@@ -41,7 +42,7 @@ export const updateMessage = async (req, res) => {
     );
     res.status(200).send(updatedMessage);
   } catch (err) {
-    res.status;
+    res.status(500).send({ err: err.message });
   }
 };
 export const saveMessage = async (newMessages) => {
@@ -50,14 +51,15 @@ export const saveMessage = async (newMessages) => {
     console.log("newMsgs", newMessages[0].message);
     console.log("jsonMsg", jsonNewMessages);
     const mappedMassages = newMessages.map((msgObj) => {
+      console.log("msgObj", msgObj);
       return {
-        sender: msgObj.message.sender,
+        sender: msgObj.sender,
         message: msgObj.message.message,
         senderUser: msgObj.message.senderUser,
       };
     });
-    console.log(mappedMassages);
     if (jsonNewMessages) {
+      console.log("test", mappedMassages);
       const savedMessage = await Message.insertMany(mappedMassages);
       console.log("savedMessages", savedMessage);
       if (savedMessage) {
