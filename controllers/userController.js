@@ -98,3 +98,12 @@ export const deleteUser = async (req, res) => {
     res.status(500).send({ message: "Something went wrong" });
   }
 };
+//* Logout
+/* export const logout = (req, res) => {
+  res.clearCookie("accessToken");
+  res.clearCookie("isLogged");
+
+  return res.status(200).json({
+    masg: "successfully logged out"
+  });
+}; */
